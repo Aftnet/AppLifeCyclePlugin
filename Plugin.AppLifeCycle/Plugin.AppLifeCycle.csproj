@@ -1,0 +1,84 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.31">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.4;netcoreapp2.0;uap10.0;net472;Xamarin.iOS1.0;Xamarin.Mac2.0;MonoAndroid90</TargetFrameworks>
+    <AssemblyName>Plugin.AppLifeCycle</AssemblyName>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <Version>0.0.0</Version>
+    <Authors>Alberto Fustinoni</Authors>
+    <PackageId>Xam.Plugin.AppLifeCycle</PackageId>
+    <PackOnBuild>true</PackOnBuild>
+    <RepositoryUrl>https://github.com/Aftnet/AppLifeCyclePlugin</RepositoryUrl>
+    <PackageIconUrl>https://github.com/Aftnet/AppLifeCyclePlugin/raw/master/Icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/aftnet/AppLifeCyclePlugin</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/aftnet/AppLifeCyclePlugin/blob/master/License.txt</PackageLicenseUrl>
+    <Owners>Alberto Fustinoni</Owners>
+    <Title>Application lifecycle plugin for Xamarin and Windows</Title>
+    <Summary>Notify application code as the host application transitions through life cycle states</Summary>
+    <Description>Notify application code as the host application transitions through life cycle states</Description>
+    <PackageTags>xamarin, plugin, plugin for xamarin, android, xamarin.forms, ios, life cycle, UWP</PackageTags>
+    <Copyright>Copyright 2018</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefineConstants>TRACE</DefineConstants>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('uap'))">
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('MonoAndroid'))">
+    <DesignTimeBuild>False</DesignTimeBuild>
+    <XamarinAndroidSupportSkipVerifyVersions>True</XamarinAndroidSupportSkipVerifyVersions>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="**\*shared.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <Compile Include="**\*.generic.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Include="**\*.generic.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="$(TargetFramework.StartsWith('uap'))">
+    <Compile Include="**\*.uap.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid'))">
+    <Reference Include="Mono.Android.Export" />
+    <PackageReference Include="Xamarin.Android.Arch.Core.Common" Version="1.1.1.1" />
+    <PackageReference Include="Xamarin.Android.Arch.Core.Runtime" Version="1.1.1.1" />
+    <PackageReference Include="Xamarin.Android.Arch.Lifecycle.Extensions" Version="1.1.1.1" />
+    <PackageReference Include="Xamarin.Android.Arch.Lifecycle.Runtime" Version="1.1.1.1" />
+    <Compile Include="**\*.android.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
+    <Compile Include="**\*.ios.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.Mac'))">
+    <Compile Include="**\*.macos.cs" />
+  </ItemGroup>
+
+  <Target Name="InstallPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)GeneratedPackages" />
+  </Target>
+  
+</Project>
