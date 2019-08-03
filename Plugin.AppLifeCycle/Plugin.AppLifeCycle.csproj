@@ -77,7 +77,7 @@
     <Compile Include="**\*.macos.cs" />
   </ItemGroup>
 
-  <Target Name="InstallPackage" AfterTargets="Pack">
+  <Target Name="MovePackage" AfterTargets="Pack">
     <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)GeneratedPackages" />
   </Target>
   
