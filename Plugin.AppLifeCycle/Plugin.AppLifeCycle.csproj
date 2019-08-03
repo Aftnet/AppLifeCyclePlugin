@@ -78,7 +78,7 @@
   </ItemGroup>
 
   <Target Name="InstallPackage" AfterTargets="Pack">
-    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)GeneratedPackages" />
+    <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)GeneratedPackages" />
   </Target>
   
 </Project>
