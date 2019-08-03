@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/Aftnet/AppLifeCyclePlugin</RepositoryUrl>
     <PackageIconUrl>https://github.com/Aftnet/AppLifeCyclePlugin/raw/master/Icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/aftnet/AppLifeCyclePlugin</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/aftnet/AppLifeCyclePlugin/blob/master/License.txt</PackageLicenseUrl>
+    <PackageLicense>https://github.com/aftnet/AppLifeCyclePlugin/blob/master/License.txt</PackageLicense>
     <Owners>Alberto Fustinoni</Owners>
     <Title>Application lifecycle plugin for Xamarin and Windows</Title>
     <Summary>Notify application code as the host application transitions through life cycle states</Summary>
